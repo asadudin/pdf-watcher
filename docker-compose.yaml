@@ -1,0 +1,20 @@
+services:
+  imagemagick-watcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imagemagick-watcher
+    volumes:
+      - ./images:/images
+      - ./padux-459103-c7f26f66215e.json:/app/credentials.json
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+    networks:
+      - padux
+
+networks:
+  padux:
+    external: true
+
